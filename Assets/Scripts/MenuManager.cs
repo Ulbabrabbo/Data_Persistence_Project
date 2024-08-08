@@ -11,11 +11,14 @@ public class MenuManager : MonoBehaviour
 
     public static MenuManager Instance;
 
-    private int finalScore;
+    public int finalScore;
     public string playerName;
     public int highScore;
 
+    public string playingName;
+
     public TextMeshProUGUI playerHighScoreText;
+    public TextMeshProUGUI nameInputText;
 
     private void Awake()
     {
@@ -29,7 +32,7 @@ public class MenuManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         if (LoadHighScore())
         {
-            playerHighScoreText.text = playerName + "High Score: " + highScore.ToString();
+            playerHighScoreText.text = playerName + ": High Score: " + highScore.ToString();
         }
     }
 
@@ -53,7 +56,7 @@ public class MenuManager : MonoBehaviour
             if (finalScore > highScore)
             {
                 SaveData data_to_save = new SaveData();
-                data_to_save.playerName = playerName;
+                data_to_save.playerName = playingName;
                 data_to_save.highScore = finalScore;
                 string new_json = JsonUtility.ToJson(data_to_save);
                 File.WriteAllText(Application.persistentDataPath + "/savefile.json", new_json);

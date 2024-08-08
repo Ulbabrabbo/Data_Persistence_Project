@@ -16,6 +16,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartNew()
     {
+        MenuManager.Instance.playingName = MenuManager.Instance.nameInputText.text;
         SceneManager.LoadScene(1);
     }
 
